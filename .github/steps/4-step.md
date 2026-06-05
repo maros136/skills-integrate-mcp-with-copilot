@@ -7,7 +7,7 @@ While AI assistants like GitHub Copilot can dramatically improve productivity, i
 > [!tip]
 > In real projects, many teams use [GitHub Actions](https://github.com/features/actions) to setup automated testing.
 
-### :keyboard: Activity: Review and merge the AI solution
+### :keyboard: Activity: Review the AI solution
 
 1. Open the new pull request created by Copilot in a new tab.
 
@@ -15,7 +15,7 @@ While AI assistants like GitHub Copilot can dramatically improve productivity, i
 
    > ✨ **Bonus:** If your Copilot subscription provides it, you can also use a specialised version of Copilot to [review the changes](https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review?tool=webui).
 
-1. Review the changes. When you are satisfied, merge the pull request.
+1. Review the changes and leave the pull request open for instructor review.
 
 1. Return to VS code and the active **Copilot Chat** session.
 

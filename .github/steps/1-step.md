@@ -142,9 +142,7 @@ Before we dive into MCP, let's start up our development environment and refamili
 
    <img width="350" alt="image" src="https://github.com/user-attachments/assets/99178d1b-adbe-4cf4-ab9c-3a4d29918a13" />
 
-1. **Commit** and **push** the `.vscode/mcp.json` file to the `main` branch.
-
-   > 🪧 **Note:** Pushing directly to `main` is not a recommended practice. It is only to simplify this exercise.
+1. **Commit** and **push** the `.vscode/mcp.json` file to your `participant/<your-name>` branch.
 
 > [!NOTE]
 > The next steps will involve creating GitHub issues. If you would like to avoid notification emails, you can unwatch the repository.
@@ -155,7 +153,7 @@ Before we dive into MCP, let's start up our development environment and refamili
 Make sure:
 
 - Your `.vscode/mcp.json` file is similar to the example provided.
-- You pushed the changes to the `main` branch.
+- You pushed the changes to your `participant/<your-name>` branch.
 
 </details>
 
