@@ -3,7 +3,7 @@ name: Step 3
 on:
   pull_request:
     branches:
-      - main
+      - 'participant/*'
 
 permissions:
   contents: read

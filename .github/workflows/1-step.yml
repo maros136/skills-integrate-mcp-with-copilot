@@ -2,6 +2,8 @@ name: Step 1
 
 on:
   push:
+    branches:
+      - 'participant/*'
     paths:
       - ".vscode/mcp.json"
 
