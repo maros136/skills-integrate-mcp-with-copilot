@@ -2,7 +2,7 @@
 
 <img width="150" align="right" alt="copilot logo" src="https://github.com/user-attachments/assets/4d22496d-850b-4785-aafe-11cba03cd5f2" />
 
-In the [Getting Started with GitHub Copilot](https://github.com/martinpolivka/skills-getting-started-with-github-copilot) exercise, we were introduced to the Mergington High School's extracurricular activities website, which allowed students to sign up for events.
+In the previous Getting Started with GitHub Copilot exercise, we were introduced to the Mergington High School's extracurricular activities website, which allowed students to sign up for events.
 
 And now we have a problem... but.. it's a good one! More teachers are asking to use it! 🎉
 
@@ -41,15 +41,11 @@ graph LR
 
 Before we dive into MCP, let's start up our development environment and refamiliarise ourself with the extracurricular activity application.
 
-1. Clone this repository to your machine.
-
-   [![Clone in VS Code](https://img.shields.io/badge/Clone%20in-VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](vscode://vscode.git/clone?url=https://github.com/martinpolivka/skills-integrate-mcp-with-copilot.git)
-
-   Or use the terminal:
+1. Fork this repository to your own GitHub account, then clone your fork to your machine.
 
    ```bash
-   # Clone the prepared workshop repository and enter its folder.
-   git clone https://github.com/martinpolivka/skills-integrate-mcp-with-copilot.git
+   # Clone your fork of this prepared workshop repository and enter its folder.
+   git clone https://github.com/<your-github-username>/skills-integrate-mcp-with-copilot.git
    cd skills-integrate-mcp-with-copilot
    ```
 
