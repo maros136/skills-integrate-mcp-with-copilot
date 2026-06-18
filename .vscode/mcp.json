@@ -1,9 +1,8 @@
 {
 	"servers": {
-		"github-mcp": {
-			"url": "https://api.githubcopilot.com/mcp/",
-			"type": "http"
+		"github": {
+			"type": "http",
+			"url": "https://api.githubcopilot.com/mcp/"
 		}
-	},
-	"inputs": []
+	}
 }
