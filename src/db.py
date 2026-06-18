@@ -84,20 +84,26 @@ def seed_data() -> None:
 
 
 def get_activities() -> dict:
-    """Return all activities with their participant lists as a dict."""
+    """Return all activities with their participant lists as a dict (single JOIN query)."""
     with get_connection() as conn:
-        rows = conn.execute("SELECT * FROM activities").fetchall()
+        rows = conn.execute("""
+            SELECT a.name, a.description, a.schedule, a.max_participants, p.email
+            FROM activities a
+            LEFT JOIN participants p ON p.activity_name = a.name
+            ORDER BY a.name
+        """).fetchall()
         result = {}
         for row in rows:
-            participants = conn.execute(
-                "SELECT email FROM participants WHERE activity_name = ?", (row["name"],)
-            ).fetchall()
-            result[row["name"]] = {
-                "description": row["description"],
-                "schedule": row["schedule"],
-                "max_participants": row["max_participants"],
-                "participants": [p["email"] for p in participants],
-            }
+            name = row["name"]
+            if name not in result:
+                result[name] = {
+                    "description": row["description"],
+                    "schedule": row["schedule"],
+                    "max_participants": row["max_participants"],
+                    "participants": [],
+                }
+            if row["email"] is not None:
+                result[name]["participants"].append(row["email"])
         return result
 
 
@@ -119,15 +125,33 @@ def get_activity(name: str) -> dict | None:
 
 
 def add_participant(activity_name: str, email: str) -> None:
-    """Add a participant to an activity. Raises ValueError on duplicate."""
+    """Add a participant to an activity.
+
+    Atomically checks capacity and inserts in a single transaction.
+    Raises ValueError for duplicate signup or full activity.
+    """
     with get_connection() as conn:
+        row = conn.execute(
+            """
+            SELECT a.max_participants, COUNT(p.email) AS current_count
+            FROM activities a
+            LEFT JOIN participants p ON p.activity_name = a.name
+            WHERE a.name = ?
+            GROUP BY a.name
+            """,
+            (activity_name,),
+        ).fetchone()
+        if row and row["current_count"] >= row["max_participants"]:
+            raise ValueError("Activity is full")
         try:
             conn.execute(
                 "INSERT INTO participants (activity_name, email) VALUES (?, ?)",
                 (activity_name, email),
             )
-        except sqlite3.IntegrityError:
-            raise ValueError("Student is already signed up")
+        except sqlite3.IntegrityError as e:
+            if "UNIQUE" in str(e):
+                raise ValueError("Student is already signed up")
+            raise
 
 
 def remove_participant(activity_name: str, email: str) -> bool:

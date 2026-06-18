@@ -11,7 +11,7 @@ from fastapi.responses import RedirectResponse
 import os
 from pathlib import Path
 from contextlib import asynccontextmanager
-import db
+from . import db
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -43,15 +43,10 @@ def get_activities():
 def signup_for_activity(activity_name: str, email: str):
     """Sign up a student for an activity"""
     # Validate activity exists
-    activity = db.get_activity(activity_name)
-    if activity is None:
+    if db.get_activity(activity_name) is None:
         raise HTTPException(status_code=404, detail="Activity not found")
 
-    # Validate capacity
-    if len(activity["participants"]) >= activity["max_participants"]:
-        raise HTTPException(status_code=400, detail="Activity is full")
-
-    # Add student (raises ValueError if already signed up)
+    # Add student — capacity check and insert are atomic inside db.add_participant()
     try:
         db.add_participant(activity_name, email)
     except ValueError as e:
